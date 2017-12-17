@@ -16,4 +16,13 @@ KillPopStars.py <tweet_id> <action>
 
 *action* is the action to take: block, mute, or report
 
-Requires a file in the current directory called 'config' that has authorization paramenters.
+Requires a file in the current directory called 'config' that has authorization paramenters. The file should have this format:
+
+```
+consumer_key    <your_consumer_key>
+consumer_secret <your_consumer_secret>
+access_token_key    <your_access_token_key>
+access_token_secret <your_access_token_secret>
+```
+
+Get your own keys at https://apps.twitter.com/.
