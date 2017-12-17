@@ -1,6 +1,6 @@
 # KillPopStars
 
-A handy script to block the author of a tweet and everyone who retweets that tweet.
+A handy script to block the author of a tweet and everyone who retweets or likes that tweet.
 
 I created this script because my Twitter handle ([@niel](http://twitter/comn/niel)) is constantly being mistaken for someone else. (If you must know, French businessman [Xavier Niel](https://twitter.com/xavier75), the town of [Niel](http://twitter.com/gemeenteniel) in Belgium, Filipino pop star [Niel Murillo](https://en.wikipedia.org/wiki/BoybandPH), and K-Pop boy band star [Ahn Daniel](https://en.wikipedia.org/wiki/Niel_(singer)). The last two are the most annoying as they don't have verified Twitter accounts and seem to have millions of fans who like to retweet each other.) So when I get a tweet intended for one of these people, I just want it to go away as quickly and efficiently as possible.
 
