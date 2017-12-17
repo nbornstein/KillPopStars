@@ -13,7 +13,7 @@ def takeAction(api, a, u):
         reportUser(api,u)
     else:
         noActionUser(api,u)
-        
+
 
 # block the user
 def blockUser(api, u):
@@ -35,9 +35,8 @@ def noActionUser(api, u):
     print 'No action for @'  + u['screen_name'] + ' (' + u['name'] + ')!'
 
 
-# main method
-if __name__ == "__main__":
-
+# check usage
+def checkUsage():
     # check usage
     if len(sys.argv) < 2:
         print
@@ -53,6 +52,15 @@ if __name__ == "__main__":
         print 'access_token_key     <your_access_token_key>'
         print 'access_token_secret  <your_access_token_secret>'
         exit()
+
+    
+
+
+# main method
+if __name__ == "__main__":
+
+    # check usage
+    checkUsage()
 
     # parameter 1 is the ID of the tweet to start with
     tweet_id = sys.argv[1]
