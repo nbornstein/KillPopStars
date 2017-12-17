@@ -3,6 +3,18 @@
 from twitter import *
 import sys
 
+# take the appropriate action on the user
+def takeAction(api, a, u):
+    if (a == 'block'):
+        blockUser(api,u)
+    elif (a == 'mute'):
+        muteUser(api,u)
+    elif (a == 'report'):
+        reportUser(api,u)
+    else:
+        noActionUser(api,u)
+        
+
 # block the user
 def blockUser(api, u):
     print 'Blocking @'  + u['screen_name'] + ' (' + u['name'] + ')!'
@@ -64,28 +76,17 @@ if __name__ == "__main__":
     tweet = api.statuses.show(id=tweet_id)
 
     # take action on the user
-    if (action == 'block'):
-        blockUser(api,tweet['user'])
-    elif (action == 'mute'):
-        muteUser(api,tweet['user'])
-    elif (action == 'report'):
-        reportUser(api,tweet['user'])
-    else:
-        noActionUser(api,tweet['user'])
+    takeAction(api,action,tweet['user'])
 
     # get all retweets
     retweets = api.statuses.retweets(id=tweet_id)
 
     # take action on everyone who retweeted it
     for retweet in retweets:
-        if (action == 'block'):
-            blockUser(api,retweet['user'])
-        elif (action == 'mute'):
-            muteUser(api,retweet['user'])
-        elif (action == 'report'):
-            reportUser(api,retweet['user'])
-        else:
-            noActionUser(api,retweet['user'])
+        takeAction(api,action,retweet['user'])
+
+    # get all likes
 
     # take action on everyone who liked it
+
     # alas, there is no API for likes :(
