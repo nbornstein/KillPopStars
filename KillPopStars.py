@@ -2,6 +2,9 @@
 
 from twitter import *
 import sys
+import urllib2
+import re
+
 
 # take the appropriate action on the user
 def takeAction(api, a, u):
@@ -34,6 +37,18 @@ def reportUser(api, u):
 def noActionUser(api, u):
     print 'No action for @'  + u['screen_name'] + ' (' + u['name'] + ')!'
 
+# get the user IDs of everyone who liked the original tweet 
+# alas, there is no API for likes :(
+# https://stackoverflow.com/questions/28982850/twitter-api-getting-list-of-users-who-favorited-a-status
+# WARNING: this may be fragile as it depends on scraping HTML
+def get_user_ids_of_post_likes(post_id):
+    try:
+        json_data = urllib2.urlopen('https://twitter.com/i/activity/favorited_popup?id=' + str(post_id)).read()
+        found_ids = re.findall(r'data-user-id=\\"+\d+', json_data)
+        unique_ids = list(set([re.findall(r'\d+', match)[0] for match in found_ids]))
+        return unique_ids
+    except urllib2.HTTPError:
+        return False
 
 # check usage
 def checkUsage():
@@ -52,8 +67,6 @@ def checkUsage():
         print 'access_token_key     <your_access_token_key>'
         print 'access_token_secret  <your_access_token_secret>'
         exit()
-
-    
 
 
 # main method
@@ -94,7 +107,9 @@ if __name__ == "__main__":
         takeAction(api,action,retweet['user'])
 
     # get all likes
+    likes = get_user_ids_of_post_likes(tweet_id)
 
     # take action on everyone who liked it
-
-    # alas, there is no API for likes :(
+    for like in likes:
+        user = api.users.lookup(user_id=like)[0]
+        takeAction(api,action,user)
