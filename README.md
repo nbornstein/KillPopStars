@@ -12,3 +12,5 @@ KillPopStars.py <tweet_id> <action>
 
 tweet_id is the Twitter ID of the tweet to start with
 action is the action to take: block, mute, or report
+
+Requires a file in the current directory called 'config' that has authorization paramenters.
