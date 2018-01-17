@@ -4,6 +4,7 @@ from twitter import *
 import sys
 import urllib2
 import re
+import os
 
 
 # take the appropriate action on the user
@@ -68,6 +69,28 @@ def checkUsage():
         print 'access_token_secret  <your_access_token_secret>'
         exit()
 
+# read the Twitter API auth from 'config' file
+def getAuth():
+    auth = {}
+    
+    # first look in local directory for a config file
+    path = 'config'
+    if not (os.path.exists(path)):
+        path = os.path.expanduser('~') + '/.KillPopStars/config'
+        if not (os.path.exists(path)):
+            path = '/etc/killpopstars/config'
+            if not (os.path.exists(path)):
+                print("No config file found.")
+                exit(2)
+
+    print "Using config file from " + path
+    f = open(path)
+    for line in f:
+        params = line.split()
+        auth[params[0]] = params[1]
+    
+    return auth;
+
 
 # main method
 if __name__ == "__main__":
@@ -84,11 +107,7 @@ if __name__ == "__main__":
         action = sys.argv[2]
 
     # read the Twitter API auth from 'config' file
-    auth = {}
-    f = open('config')
-    for line in f:
-        params = line.split()
-        auth[params[0]] = params[1]
+    auth = getAuth()
 
     # log in to twitter
     api = Twitter(auth=OAuth(auth['consumer_key'], auth['consumer_secret'], auth['access_token_key'], auth['access_token_secret']))
