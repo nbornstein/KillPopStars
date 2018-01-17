@@ -61,7 +61,8 @@ def checkUsage():
         print 'tweet_id is the Twitter ID of the tweet to start with'
         print 'action is the action to take: block (default), mute, or report'
         print
-        print 'Requires a file in the current directory called \'config\' that has authorization parameters. The file should have this format:'
+        print 'Requires a file called \'config\' that has authorization parameters, which will be read from the local directory, a .KillPopStars directory in the user\'s home directory, or the /etc/KillPopStars/ directory. The file should have this format:
+'
         print
         print 'consumer_key         <your_consumer_key>'
         print 'consumer_secret      <your_consumer_secret>'
